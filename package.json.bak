@@ -45,6 +45,7 @@
         "@bochilteam/scraper": "^3.0.0",
         "@shineiichijo/marika": "github:shineiichijo/marika",
         "@vitalets/google-translate-api": "^8.0.0",
+        "@xct007/frieren-scraper": "github:xct007/frieren-scraper",
         "acrcloud": "^1.4.0",
         "api-dylux": "*",
         "awesome-phonenumber": "^2.73.0",
