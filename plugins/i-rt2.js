@@ -2,7 +2,7 @@ import fs from 'fs';
 import fetch from 'node-fetch';
 import moment from 'moment-timezone';
 
-let handler = async (m, { conn, args, command }) => {
+const handler = async (m, { conn, args, command }) => {
   let _muptime;
   if (process.send) {
     process.send('uptime');
@@ -14,29 +14,16 @@ let handler = async (m, { conn, args, command }) => {
   }
   let muptime = clockString(_muptime);
 
-  let upt = 'ʀᴜɴᴛɪᴍᴇ ʙᴏᴛ';
+  let upt = `
+  ʀᴜɴᴛɪᴍᴇ ʙᴏᴛ
+  ${muptime}`;
   let mentionedJid = [m.sender];
-  let flaa = `https://flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=amped-logo&doScale=true&scaleWidth=800&scaleHeight=500&text=${muptime}`;
-  await conn.reply(m.chat, upt, m, {
-    mentions: mentionedJid,
-    contextInfo: {
-      forwardingScore: 9999,
-      isForwarded: true,
-      externalAdReply: {
-        mediaType: 1,
-        mediaUrl: flaa,
-        title: ' ',
-        thumbnail: { url: flaa },
-        thumbnailUrl: flaa,
-        sourceUrl: 'https://wa.me/stickerpack/Betakkuma2',
-        renderLargerThumbnail: true
-      }
-    }
-  });
+  let res = `https://flamingtext.com/net-fu/proxy_form.cgi?&imageoutput=true&script=amped-logo&doScale=true&scaleWidth=800&scaleHeight=500&text=${muptime}`;
+  conn.sendFile(m.chat, res, 'puad.jpg', upt, m, false);
 };
 
-handler.help = ['runtime1'];
-handler.command = ['runtime1', 'rt1'];
+handler.help = ['runtime2'];
+handler.command = ['runtime2', 'rt2'];
 
 export default handler;
 

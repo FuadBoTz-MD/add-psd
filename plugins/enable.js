@@ -285,15 +285,14 @@ const listMessage = {
        
     /** By Fokus ID */
     case 'owneronly':
-    case 'public':
-    case 'self':
-      isAll = true
-      if (!isROwner) {
-        global.dfail('rowner', m, conn)
-        throw false
+	 case 'hanyaowner':
+	 case 'modeowner':
+        if (!isOwner) {
+          global.dfail('owner', m, conn)
+          throw false       
       }
-      bot.self = isEnable
-      break
+       chat.owneronly = isEnable
+       break
       
     case 'antilink':
       if (m.isGroup) {

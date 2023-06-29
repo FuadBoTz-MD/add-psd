@@ -1,8 +1,15 @@
 Arguments: 
+<<<<<<< HEAD
+  /usr/local/bin/node /opt/yarn-v1.22.19/bin/yarn.js add api-dylux^*
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+=======
   /usr/local/bin/node /opt/yarn-v1.22.19/bin/yarn.js add fg-ig^*
 
 PATH: 
   /home/container/v7/node_modules/.bin:/home/container/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+>>>>>>> fbe97e2896dd5d46812b5838ff1bb2288a415e60
 
 Yarn version: 
   1.22.19
@@ -14,7 +21,11 @@ Platform:
   linux x64
 
 Trace: 
+<<<<<<< HEAD
+  Error: https://registry.yarnpkg.com/api-dylux%5E*: Not found
+=======
   Error: https://registry.yarnpkg.com/fg-ig%5E*: Not found
+>>>>>>> fbe97e2896dd5d46812b5838ff1bb2288a415e60
       at params.callback [as _callback] (/opt/yarn-v1.22.19/lib/cli.js:66145:18)
       at self.callback (/opt/yarn-v1.22.19/lib/cli.js:140890:22)
       at Request.emit (node:events:513:28)
@@ -73,6 +84,11 @@ npm manifest:
          "@adiwajshing/baileys": "npm:baileys-md@^5.0.5",
           "@bochilteam/scraper": "^3.0.0",
           "@shineiichijo/marika": "github:shineiichijo/marika",
+<<<<<<< HEAD
+          "@vitalets/google-translate-api": "^8.0.0",
+          "@xct007/frieren-scraper": "github:xct007/frieren-scraper",
+=======
+>>>>>>> fbe97e2896dd5d46812b5838ff1bb2288a415e60
           "acrcloud": "^1.4.0",
           "awesome-phonenumber": "^2.73.0",
           "axios": "^0.24.0",

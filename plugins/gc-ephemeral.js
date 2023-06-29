@@ -12,7 +12,7 @@ const sections = [
 ]
 const listMessage = {
   text: ' ',
-  footer: '\nUpdated By ᴋʏᴀᴍɪ×͜×࿐',
+  footer: '\nUpdated By FuadXy×͜×࿐',
   title: `┏━°⌜ Pilih Waktu/Hari nya ⌟°━┓`,
   buttonText: "Pilihan Di Sini",
   sections

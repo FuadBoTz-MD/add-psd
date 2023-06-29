@@ -1,19 +1,34 @@
-let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-  if (!args[0]) throw `Tidak ada teks untuk survei\n\nContoh: *${usedPrefix + command}* Pesan |Hai|Kak`
-  if (!text.includes('|')) throw `Pisahkan polling dengan tanda *|*\n\nContoh: *${usedPrefix + command}* survei saya|n|Apa|kabar|baik`
+let handler = async (m, {
+    conn,
+    text,
+    args,
+    usedPrefix,
+    command
+}) => {
 
-  let name = conn.getName(m.sender)
-  let a = []
-  let b = text.split('|')
-  for (let c = 1; c < b.length; c++) {
-    a.push(b[c])
-  }
-  await conn.sendPoll(m.chat, `📋 *Survei diminta oleh:* ${name}\n\n*Pesan:* ${b[0]}`, a, m)
+    let a = text.split("|").slice(1)
+    if (!a[1]) throw "Format\n" + usedPrefix + command + " halo |ya|gak"
+    if (a[12]) throw "Kebanyakan pilihan, Format\n" + usedPrefix + command + " halo |ya|gak"
+    if (checkDuplicate(a)) throw "Ada kesamaan isi dalam pesan!"
+    let cap = "*Polling Request By* " + m.name + "\n*Pesan:* " + text.split("|")[0]
+
+    const pollMessage = {
+        name: cap,
+        values: a,
+        multiselect: false,
+        selectableCount: 1
+    }
+    await conn.sendMessage(m.chat, {
+        poll: pollMessage
+    })
+
 }
+handler.help = ["poll pertanyaan|pilihan|pilihan"]
+handler.tags = ["group"]
+handler.command = /^po(l((l?ing|ls)|l)|ols?)$/i
 
-handler.help = ['poll <halo|apa|kabar>']
-handler.tags = ['group']
-handler.command = ['poll', 'polling']
-handler.group = true
+export default handler
 
-export { handler }
+function checkDuplicate(arr) {
+    return new Set(arr).size !== arr.length
+}

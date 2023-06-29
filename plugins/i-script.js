@@ -2,7 +2,7 @@ import moment from 'moment-timezone'
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, args }) => {
-   let res = await fetch('https://api.github.com/repos/ShionMDv/ShionMDv')
+   let res = await fetch('https://api.github.com/repos/FuadBoTz-MD/Zura-MD')
    let pp = 'https://telegra.ph/file/344ca06078289bb8fe8dc.jpg'
    let link = 'https://chat.whatsapp.com/EAR7T7H59vOJz8KcwMP179'
    let json = await res.json()

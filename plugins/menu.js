@@ -6,7 +6,7 @@ import moment from 'moment-timezone'
 let handler = async (m, { conn, usedPrefix: _p, __dirname, args }) => {
 await conn.sendMessage(m.chat, {
           react: {
-            text: '🦋',
+            text: `${pickRandom(['👻', '🦋', '🏁'])}`,
             key: m.key,
           }})
 let formatSize = sizeFormatter({
@@ -21,7 +21,7 @@ let totalf = Object.values(global.plugins).filter(
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.fromMe ? conn.user.jid : m.sender
 let name = conn.getName(who)
 
-let pp = 'https://telegra.ph/file/b0b58f446bd5935ee6c00.jpg'
+let pp = `${pickRandom(['https://telegra.ph/file/55d519d8ec7f25ba6c4bb.jpg', 'https://telegra.ph/file/7108d5804a49b4fcdae27.jpg', 'https://telegra.ph/file/37dc838d0e326bc21e95d.jpg'])}`
 
 let ucpn = `${ucapan()}`
 let info = `Hallo ${name}👋🏻* \n*${ucpn}*\n\nSelamat datang di dashboard bot kami!*\n\n- Kami berharap Anda akan menikmati pengalaman berinteraksi dengan bot kami yang ramah dan intuitif.\n\n- Kami telah menyertakan berbagai fitur yang dapat membantu Anda mengelola dan meningkatkan kinerja bot Anda.\n\n- Kami berharap Anda akan menikmati menggunakan dashboard bot kami dan semoga Anda mendapatkan manfaat dari fitur-fitur yang kami tawarkan.
@@ -102,4 +102,7 @@ function megabit() {
     let stats = fs.statSync("database.json")
     let ukuran_mb = stats.size / (1024*1024)
     return ukuran_mb.toFixed(1)
-    }
+}
+function pickRandom(list) {
+     return list[Math.floor(Math.random() * list.length)]
+  }

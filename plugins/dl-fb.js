@@ -1,14 +1,24 @@
-import { facebookdl, facebookdlv2 } from '@bochilteam/scraper'
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-if (!args[0]) throw `Use example ${usedPrefix + command} https://www.facebook.com/watch?v=636541475139*`
-const { result } = await facebookdl(args[0]).catch(async _ => await facebookdlv2(args[0]))
-for (const { url, isVideo } of result.reverse()) await conn.sendFile(m.chat, url, `facebook.${!isVideo ? 'bin' : 'mp4'}`, `✨ *ᴜʀʟ:* ${url}`, m)
-  let info = `💝 *ʟᴏᴀᴅɪɴɢ.....*
-  `.trim()
-  throw info
-}
-handler.help = ['facebook2'].map(v => v + ' <url>')
-handler.tags = ['downloader']
-handler.command = /^((facebook|fb)(downloder|dl)?)$/i
-handler.exp = 35
-export default handler
+import fetch from 'node-fetch';
+import api from 'hxz-api';
+
+let handler = async (m, { conn, text, usedPrefix, command }) => {
+  if (!text) throw `🚩 *Example:* ${usedPrefix + command} https://www.facebook.com/ngakakocak/videos/video-lucu-dan-gokil/607085686836013`;
+  
+  let f = await api.fbdown(text);
+  
+  await conn.sendMessage(m.chat, {
+    react: {
+      text: "⏳",
+      key: m.key,
+    }
+  });
+  
+  let hasil = `*DOWNLOADER FACEBOOK*`;
+  conn.sendFile(m.chat, f.Normal_video, 'fbmp4', hasil, m);
+};
+
+handler.help = ['facebook <url>'];
+handler.tags = ['downloader'];
+handler.command = /^((facebook|fb)(downloader|dl)?)$/i;
+
+export default handler;

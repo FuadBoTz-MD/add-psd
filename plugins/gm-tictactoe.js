@@ -3,6 +3,8 @@ import TicTacToe from '../lib/tictactoe.js'
 let handler = async (m, { conn, usedPrefix, command, text }) => {
     conn.game = conn.game ? conn.game : {}
     if (Object.values(conn.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) throw 'Kamu masih didalam game'
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.fromMe ? conn.user.jid : m.sender
+let pp = 'https://telegra.ph/file/6f8cecf03c2c8998d6670.png'
     let room = Object.values(conn.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
     // m.reply('[WIP Feature]')
     if (room) {
@@ -33,12 +35,8 @@ ${arr.slice(6).join('')}
 Menunggu @${room.game.currentTurn.split('@')[0]}
 Ketik *nyerah* untuk nyerah
 `.trim()
-        if (room.x !== room.o) await conn.sendButton(room.x, str, author, ['Nyerah', 'nyerah'], m, {
-            mentions: conn.parseMention(str)
-        })
-        await conn.sendButton(room.o, str, author, ['Nyerah', 'nyerah'], m, {
-            mentions: conn.parseMention(str)
-        })
+        if (room.x !== room.o) await conn.reply(room.x, str, m, { contextInfo: { mentionedJid: [who], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: '', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
+        await conn.reply(room.o, str, m, { contextInfo: { mentionedJid: [who], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: '', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
     } else {
         room = {
             id: 'tictactoe-' + (+new Date),
@@ -47,9 +45,17 @@ Ketik *nyerah* untuk nyerah
             game: new TicTacToe(m.sender, 'o'),
             state: 'WAITING'
         }
+        /*
         if (text) room.name = text
         m.reply('Menunggu partner' + (text ? ` mengetik command dibawah ini
 ${usedPrefix}${command} ${text}` : ''))
+*/
+        if (text) room.name = text
+        let str = 'Menunggu partner' + (text ? ` mengetik command dibawah ini
+${usedPrefix}${command} ${text}` : '')        
+        await conn.reply(room.x, str, m, { contextInfo: { mentionedJid: [who], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: `Silahkan ketik ini ${usedPrefix}${command} ${text}`, thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
+
+
         conn.game[room.id] = room
     }
 }

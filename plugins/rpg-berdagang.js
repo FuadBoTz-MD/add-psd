@@ -1,4 +1,4 @@
-
+//Recode FuadXy
 // let pajak = 0.02
 let handler = async (m, { conn, text }) => {
 let dapat = (Math.floor(Math.random() * 5000))
@@ -17,32 +17,41 @@ let dapat = (Math.floor(Math.random() * 5000))
   users[who].money -= dapat * 1
  users[m.sender].money -= dapat * 1
   global.db.data.users[m.sender].lastdagang = new Date * 1
-  m.reply(`Mohon tunggu kak..\nKamu dan @${who.replace(/@.+/, '')} sedang berdagang.. ðŸ˜…\n\nKamu dan @${who.replace(/@.+/, '')} meletakkan modal -${dapat} ðŸ˜…`)
+  let text = `Mohon tunggu kak..\nKamu dan @${who.split(`@`)[0]} sedang berdagang.. ðŸ˜…\n\nKamu dan @${who.split(`@`)[0]} meletakkan modal -${dapat} ðŸ˜…`
+  conn.reply(m.chat, text, m, { mentions: [who] })
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +5000\n${users[who].money += 5000} Money @${who.replace(/@.+/, '')}`, m)
+let text2 = `Selamat kamu dan @${who.split(`@`)[0]} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.split(`@`)[0]} didapatkan +5000\n${users[who].money += 5000} Money @${who.split(`@`)[0]}`
+conn.reply(m.chat, text2, m, { mentions: [who] })					
 					}, 3600000)
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +5000\n${users[who].money += 5000} Money @${who.replace(/@.+/, '')}`, m)
+let text3 = `Selamat kamu dan @${who.split(`@`)[0]} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.split(`@`)[0]} didapatkan +5000\n${users[who].money += 5000} Money @${who.split(`@`)[0]}`
+conn.reply(m.chat, text3, m, { mentions: [who] })
 					}, 7200000)
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +5000\n${users[who].money += 5000} Money @${who.replace(/@.+/, '')}`, m)
+  let text4 = `Selamat kamu dan @${who.split(`@`)[0]} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.split(`@`)[0]} didapatkan +5000\n${users[who].money += 5000} Money @${who.split(`@`)[0]}`
+  conn.reply(m.chat, text4, m, { mentions: [who] })
 					}, 10800000)
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +5000\n${users[who].money += 5000} Money @${who.replace(/@.+/, '')}`, m)
+let text5 = `Selamat kamu dan @${who.split(`@`)[0]}} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.split(`@`)[0]} didapatkan +5000\n${users[who].money += 5000} Money @${who.split(`@`)[0]}`
+conn.reply(m.chat, text5, m, { mentions: [who] })
 					}, 14400000)
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +5000\n${users[who].money += 5000} Money @${who.replace(/@.+/, '')}`, m)
+let text6 = `Selamat kamu dan  @${who.split(`@`)[0]} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang  @${who.split(`@`)[0]}} didapatkan +5000\n${users[who].money += 5000} Money  @${who.split(`@`)[0]}`
+conn.reply(m.chat, text6, m, { mentions: [who] })
 					}, 18000000)
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +5000\n${users[who].money += 5000} Money @${who.replace(/@.+/, '')}`, m)
+let text7 = `Selamat kamu dan  @${who.split(`@`)[0]} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang  @${who.split(`@`)[0]} didapatkan +5000\n${users[who].money += 5000} Money  @${who.split(`@`)[0]}`
+conn.reply(m.chat, text7, m, { mentions: [who] })
 					}, 21600000)
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +5000\n${users[who].money += 5000} Money @${who.replace(/@.+/, '')}`, m)
+let text8 = `Selamat kamu dan  @${who.split(`@`)[0]} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +5000\n${users[m.sender].money += 5000} Money kamu\n\nPenghasilan dagang  @${who.split(`@`)[0]} didapatkan +5000\n${users[who].money += 5000} Money @${who.split(`@`)[0]}`
+conn.reply(m.chat, text8, m, { mentions: [who] })
 					}, 25200000)
   setTimeout(() => {
-					conn.reply(m.chat, `Selamat kamu dan @${who.replace(/@.+/, '')} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +10000\n${users[m.sender].money += 10000} Money kamu\n\nPenghasilan dagang @${who.replace(/@.+/, '')} didapatkan +10000\n${users[who].money += 10000} Money @${who.replace(/@.+/, '')}`, m)
+let text9 = `Selamat kamu dan @${who.split(`@`)[0]} mendapatkan money..\n\nPenghasilan dagang kamu didapatkan +10000\n${users[m.sender].money += 10000} Money kamu\n\nPenghasilan dagang @${who.split(`@`)[0]} didapatkan +10000\n${users[who].money += 10000} Money @${who.split(`@`)[0]}`
+conn.reply(m.chat, text9, m, { mentions: [who] })
 					}, 28800000)
-}else conn.sendBut(m.chat, `Anda Sudah Berdagang , tunggu ${timers} lagi..`,wm,'Adventure','.adventure', m)
+}else m.reply(`Anda Sudah Berdagang , tunggu ${timers} lagi..`)
 }
 handler.help = ['berdagang *@tag*']
 handler.tags = ['rpg']

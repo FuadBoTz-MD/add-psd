@@ -7,7 +7,7 @@ let handler = async function (m, { conn, text, usedPrefix, command }) {
 
 let named = conn.getName(m.sender)
 let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.fromMe ? conn.user.jid : m.sender
-let kled = 'https://telegra.ph/file/4b61139736fcebba60f7e.png'
+let kled = 'https://telegra.ph/file/e09e6340be8071cbcfa3e.png'
 
 let info = `
 ━━━━━▢ *SEWA BOT* ▢━━━━━

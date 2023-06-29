@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url'
 import { setupMaster, fork } from 'cluster'
 import { watchFile, unwatchFile } from 'fs'
 import cfonts from 'cfonts';
+import chalkAnimation from 'chalk-animation'
 import { createInterface } from 'readline'
 import yargs from 'yargs'
 
@@ -25,6 +26,10 @@ font: 'console',
 align: 'center',
 gradient: ['red', 'magenta']})
 
+
+setTimeout(() => {
+  chalkAnimation.rainbow('® By FuadXy彡\nHanya bot biasa... kadang suka error🗿')})
+  
 var isRunning = false
 /**
  * Start a js file

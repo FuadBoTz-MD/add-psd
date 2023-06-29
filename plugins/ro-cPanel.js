@@ -17,12 +17,13 @@ const format = sizeFormatter()
 let handler = async (m, { conn, args, text, usedPrefix: _p, command, isROwner }) => {
     
     //Manage panel
-    const domain = "https://fuadxy.mypannelku.com"
-const apikey = "ptla_w7w5QZNACqIox1QIjW1lynYAfOiocwCB1V6W45v4mpN"
-const c_apikey = "ptlc_8rfhOvYNtPgx1uhfjrs4KULpymbCoUmTOL4kzs6cEOe"
+    const domain = "https://vortexfrnzy.kangpannel.xyz"
+const apikey = "ptla_UjavK8smBhgNAlQ9B6Mx9QCf0BI7QvDyaZPGJ7mHDXN"
+const c_apikey = "ptlc_HGW4VuAIsHSVB4twS7gIb39x9uCvvFfVgputc3CTtLA"
 
     const webPage = "https://fuadxy.mypannelku.com"
     
+           let pp = 'https://telegra.ph/file/ce84fe254a72a8316c7d2.png'
     
     switch (command) {
         case "addusr": {
@@ -140,29 +141,19 @@ Gunakan dengan sebaik mungkin, simpan informasi akun karna jika hilang maka buka
             let sections = []
             for (let user of users) {
                 let u = user.attributes
-                let obj = {
-                    title: "-- DPANEL HOST --",
-                    rows: [
-                        { title: `${u.id}. ${u.username}`, rowId: `${_p}detusr ` + u.id, description: u.first_name + " " + u.last_name },
-                    ]
-                }
-                await sections.push(obj)
-                if (sections.length === 50) {
-                    sections.push({
-                        title: "-- PANEL --",
-                        rows: [
-                            { title: `⏩ NEXT`, rowId: `${_p}listusr 2`, description: "Page 2" },
-                        ]
-                    })
-                }
+                let obj = `
+                -- DPANEL HOST --
+                ${u.id}. ${u.username}
+                 
+                 Page 2
+                ${_p}listusr 2`
+                await conn.reply(m.chat, obj, m, { contextInfo: { mentionedJid: [m.sender], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: '', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
             }
-            await conn.sendMessage(m.chat, {
-                text: "Berikut list user *PANEL*",
-                footer: `Page: ${res.meta.pagination.current_page}/${res.meta.pagination.total_pages}`,
-                title: "*PANEL*",
-                buttonText: `${res.meta.pagination.count} Users`,
-                sections
-            })
+            let opti = `
+            Berikut list user *PANEL*
+            Page: ${res.meta.pagination.current_page}/${res.meta.pagination.total_pages}
+            ${res.meta.pagination.count} Users`
+            await conn.reply(m.chat, opti, m, { contextInfo: { mentionedJid: [m.sender], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: '', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
         }
             break
         case "detusr": {

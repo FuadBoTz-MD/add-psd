@@ -11,6 +11,12 @@ let info = `Ada Apa Broo...? (｡>_<｡)`
 let td = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
 
+await conn.relayMessage(m.sender, {
+                    protocolMessage: {
+                        key: m.key,
+                        type: 11
+                    }
+                }, {})
 await conn.sendPresenceUpdate('composing', m.chat)
 conn.reply(m.chat, info, m, { quoted: fgif },{ contextInfo: { externalAdReply: { showAdAttribution: true,
       mediaUrl: "https://Instagram.com/fuadxy99",

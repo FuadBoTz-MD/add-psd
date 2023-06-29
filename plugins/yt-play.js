@@ -1,61 +1,57 @@
-import { youtubeSearch } from '@bochilteam/scraper'
+import { youtubeSearch, youtubedl, youtubedlv2, youtubedlv3 } from '@bochilteam/scraper'
 let handler = async (m, { conn, command, text, usedPrefix }) => {
-  
-let fkontak = { "key": { "participants":"0@s.whatsapp.net", "remoteJid": "status@broadcast", "fromMe": false, "id": "Halo" }, "message": { "contactMessage": { "vcard": `BEGIN:VCARD\nVERSION:3.0\nN:Sy;Bot;;;\nFN:y\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Ponsel\nEND:VCARD` }}, "participant": "0@s.whatsapp.net" }
-  
-  if (!text) throw `Contoh: ${usedPrefix}${command} Another Love`
+  if (!text) throw `🚩 Use example ${usedPrefix}${command} naruto blue bird`
   let vid = (await youtubeSearch(text)).video[0]
-  if (!vid) throw 'Video/Audio Tidak ditemukan'
+  await conn.sendMessage(m.chat, { react: { text: "⏳",key: m.key,}
+  })  
+  if (!vid) throw 'Tidak di temukan, coba untuk membalikkan judul dan author nya'
   let { title, description, thumbnail, videoId, durationH, viewH, publishedTime } = vid
   const url = 'https://www.youtube.com/watch?v=' + videoId
-let ytnya = `*𓆩 𓃠 𓆪 ✧═══ YouTube ═══✧ 𓆩 𓃠 𓆪*
-ও *TITLE*
-» ${title}
-﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
-ও *DESCRIPTION*
-» ${description}
-﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
-ও *PUBLISHED*
-» ${publishedTime}
-﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
-ও *DURATION*
-» ${durationH}
-﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
-ও *VIEWS*
-» ${viewH}
-﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘﹘
-ও *URL*
-» ${url}
-*𓆩 𓃠 𓆪 ✧═══ ${wm} ═══✧ 𓆩 𓃠 𓆪*`
+let vap = `
+𝐓𝐢𝐭𝐥𝐞: ${title}
+𝐔𝐫𝐥: ${url}
+𝐃𝐞𝐬𝐜𝐫𝐢𝐩𝐭𝐢𝗼𝐧 ${description}
+𝐏𝐮𝐛𝐥𝐢𝐬𝐡𝐞𝐝: ${publishedTime}
+𝐃𝐮𝐫𝐚𝐭𝐢𝗼𝐧: ${durationH}
+𝐕𝐢𝐞𝐰: ${viewH}
 
-const sections = [{
-title:' Pilih Type Nya ',
-rows: [
-{title: "༺ 𝘈𝘜𝘋𝘐𝘖 𝘝𝟣 ༻ (Option 1)", rowId: `${usedPrefix}yta ${url}`, description: `${title}\n`},
-{title: "༺ 𝘈𝘜𝘋𝘐𝘖 𝘝𝟤 ༻ (Option 2)", rowId: `${usedPrefix}play3 ${url}`, description: `${title}\n`},
-{title: "༺ 𝙑𝙄𝘿𝙀𝙊 ༻ (Option 3)", rowId: `${usedPrefix}ytv ${url}`, description: `${title}\n`},
-{title: "༺  𝗔 𝗨 𝗗 𝗜 𝗢 ༻ (Still Error)", rowId: `${usedPrefix}play.1 ${url}`, description: `${title}\n`},
-{title: "༺  𝗩 𝗜 𝗗 𝗘 𝗢 ༻ (Still Error)", rowId: `${usedPrefix}play.2 ${url}`, description: `${title}\n`},
-]},{
-title: ' ⇌• Pencarian Lebih Lengkap •⇋ ',
-rows: [
-{title: ".·:*¨Youtube Search¨*:·.", rowId: `${usedPrefix}ytsearch ${text}`}
-]}]
-const listMessage = {
-  text: `*YouTube  ${text}*`,
-  footer: ytnya,
-  title: '*Youtube Download*',
-  buttonText: `Pilih Disini`,
-  sections
+`
+conn.sendMessage(m.chat, {
+text: vap,
+contextInfo: {
+externalAdReply: {
+title: `Y O U T U B E  •  P L A Y`,
+thumbnailUrl: thumbnail,
+mediaType: 1,
+renderLargerThumbnail: true
+}}}, { quoted: m}) 
+  const yt = await await youtubedlv2(url).catch(async _ => await youtubedl(url)).catch(async _ => await youtubedlv3(url))
+const link = await yt.audio['128kbps'].download()
+  let doc = { 
+  audio: 
+  { 
+    url: link 
+}, 
+mimetype: 'audio/mp4', fileName: `${title}`, contextInfo: { externalAdReply: { showAdAttribution: true,
+mediaType:  2,
+mediaUrl: url,
+title: title,
+body: "Regards By FuadXy",
+sourceUrl: url,
+thumbnail: await(await conn.getFile(thumbnail)).data                                                                     
+                                                                                                                 }
+                       }
+  }
+  return conn.sendMessage(m.chat, doc, { quoted: m })
 }
-await conn.sendMessage(m.chat, listMessage, {quoted: fkontak})
-}
-handler.help = ['play', 'play2'].map(v => v + ' <pencarian>')
+handler.help = ['play'].map(v => v + ' <pencarian>')
 handler.tags = ['downloader']
-handler.command = /^play2?$/i
+handler.command = /^play$/i
 
 handler.exp = 0
 handler.limit = true
-handler.register = true
-
 export default handler
+
+function pickRandom(list) {
+  return list[Math.floor(list.length * Math.random())]
+}

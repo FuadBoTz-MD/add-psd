@@ -14,7 +14,7 @@ let handler = async (m, { conn, usedPrefix, participants }) => {
 
   let lamaPertarungan = getRandom(0, 1)
 
-  m.reply(`*Kamu* (level ${global.db.data.users[m.sender].level}) menantang *'@' +${conn.getName(lawan)}* (level ${global.db.data.users[lawan].level}) dan sedang dalam pertarungan.\n\nTunggu ${lamaPertarungan} menit lagi dan lihat siapa yg menang.`)
+  m.reply(`*Kamu* (level ${global.db.data.users[m.sender].level}) menantang *${conn.getName(lawan)}* (level ${global.db.data.users[lawan].level}) dan sedang dalam pertarungan.\n\nTunggu ${lamaPertarungan} menit lagi dan lihat siapa yg menang.`)
 
   conn.fight[m.sender] = true
 

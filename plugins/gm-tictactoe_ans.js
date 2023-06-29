@@ -1,5 +1,7 @@
 import { format } from 'util'
 
+let who = m.mentionedJid && m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : m.fromMe ? conn.user.jid : m.sender
+
 let debugMode = !1
 
 let winScore = 4999
@@ -59,6 +61,7 @@ export async function before(m) {
             isWin = true
         }
         let winner = isSurrender ? room.game.currentTurn : room.game.winner
+        let pp = 'https://telegra.ph/file/996a5b93e8ae1c8446fc6.png'
         let str = `
 ${arr.slice(0, 3).join('')}
 ${arr.slice(3, 6).join('')}
@@ -74,11 +77,8 @@ Room ID: ${room.id}
             room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
         const btn = isTie ? ['TicTacToe', '/ttt'] : ['Nyerah', 'nyerah']
         if (room.x !== room.o)
-            await this.sendButton(room.x, str, author, btn, m, {
-                mentions: this.parseMention(str)
-            })
-        await this.sendButton(room.o, str, author, btn, m, {
-            mentions: this.parseMention(str)
+            await conn.reply(room.x, str, m, { contextInfo: { mentionedJid: [who], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: '', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
+            await conn.reply(room.o, str, m, { contextInfo: { mentionedJid: [who], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: '', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
         })
         if (isTie || isWin) {
             users[room.game.playerX].exp += playScore

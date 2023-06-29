@@ -42,7 +42,7 @@ ${usedPrefix}${command} [type]
 ★ ᴇxᴀᴍᴩʟᴇ:
 ${usedPrefix}${command} legendary`.trim()
   if (!leaderboard.includes(type)) 
-  return await conn.reply(m.chat, wrong, m, { contextInfo: { isForwarded: false, forwardingScore: 9999, externalAdReply :{ mediaType: 1, mediaUrl: kled, title: `Leaderboard`, thumbnail: { url: kled }, thumbnailUrl: kled, renderLargerThumbnail: true }}})
+  return await conn.reply(m.chat, wrong, m, { contextInfo: { isForwarded: false, forwardingScore: 9999, externalAdReply :{ mediaType: 1, mediaUrl: kled, title: `L e a d e r b o a r d`, thumbnail: { url: kled }, thumbnailUrl: kled, renderLargerThumbnail: true }}})
   let page = isNumber(args[1]) ? Math.min(Math.max(parseInt(args[1]), 0), getPage(type)) : 0
   let sortedItem = users.map(toNumber(type)).sort(sort(type))
   let userItem = sortedItem.map(enumGetKey)
@@ -54,7 +54,7 @@ ${usedPrefix}${command} legendary`.trim()
 
 ${sortedItem.slice(page * 0, page * 5 + 5).map((user, i) => `${i + 1}.*﹙${user[type]}﹚*- ${participants.some(p => areJidsSameUser(user.jid, p.id)) ? `${conn.getName(user.jid)} \nwa.me/` : 'ғʀᴏᴍ ᴏᴛʜᴇʀ ɢʀᴏᴜᴩ\n wa.me/'}${user.jid.split`@`[0]}`).join`\n\n`}
 `.trim()
-  return await conn.reply(m.chat, text, m, { contextInfo: { isForwarded: false, forwardingScore: 9999, externalAdReply :{ mediaType: 1, mediaUrl: kled, title: `Leaderboard`, thumbnail: { url: kled }, thumbnailUrl: kled, renderLargerThumbnail: true }}})
+  return await conn.reply(m.chat, text, m, { contextInfo: { isForwarded: false, forwardingScore: 9999, externalAdReply :{ mediaType: 1, mediaUrl: kled, title: `L e a d e r b o a r d`, thumbnail: { url: kled }, thumbnailUrl: kled, renderLargerThumbnail: true }}})
 }
 handler.help = ['leaderboard [jumlah user]', 'lb [jumlah user]']
 handler.tags = ['xp']
