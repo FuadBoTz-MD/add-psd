@@ -129,7 +129,11 @@ handler.help = ['scanbot']
 handler.tags = ['jadibot', 'baileys']
 handler.command = /^scanbot$/i
 handler.premium = true
+<<<<<<< HEAD
 handler.private = true
+=======
+handler.private = false
+>>>>>>> ddfcb1e1 (V7)
 export default handler
 
 const more = String.fromCharCode(8206)

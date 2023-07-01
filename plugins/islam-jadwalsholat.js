@@ -1,12 +1,13 @@
 import { jadwalsholat } from '@bochilteam/scraper'
 let handler = async (m, { text, usedPrefix, command }) => {
     if (!text) throw `Use example ${usedPrefix}${command} semarang`
+    let pp = 'https://telegra.ph/file/f9f4edee92151c09cbf44.jpg'
     const res = await jadwalsholat(text)
-    m.reply(`
-Jadwal Sholat *${text}*
-
-${Object.entries(res.today).map(([name, data]) => `*Sholat ${name}:* ${data}`).join('\n').trim()}
-`.trim())
+    let txt = `乂 *J A D W A L - S H O L A T*\n\n`
+      txt += `*◉ Area: ${text}*\n\n`
+      txt += `${Object.entries(res.today).map(([name, data]) => ` ◦ *Jadwal ${name}:* ${data}`).join('\n').trim()}
+`.trim()
+await conn.reply(m.chat, txt, m, { mentions: [m.sender], contextInfo: { forwardingScore: 9999, isForwarded: true, externalAdReply :{ mediaType: 1, mediaUrl: pp, title: 'ғᴜᴀᴅ-ᴍᴅ彡', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: null, renderLargerThumbnail: true }}})
 }
 handler.help = ['salat <daerah>']
 handler.tags = ['quran']

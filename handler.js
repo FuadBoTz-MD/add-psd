@@ -1092,9 +1092,31 @@ sourceUrl: sgc
  } 
 })
     let msgg = {
-    	unreg: '📮 Verifikasi Di perlukan untuk menambahkan user ke dalam database\n\nApakah Bahaya? Tidak Kok... Supaya Data Setiap User Tersimpan Dan Bot Dapat Bekerja Dengan Benar.*\n\nDaftar Ketik .daftar namamu.umurmu\nContoh .daftar FuadXy.20'
+    	unreg: `
+📮 Verifikasi Di perlukan untuk menambahkan user ke dalam database.   	
+  Apakah Bahaya? Tidak Kok... Supaya Data Setiap User Tersimpan Dan Bot Dapat Bekerja Dengan *Benar.*
+
+*Type Daftar*
+.daftar *(Daftar Menggunakan nama & umur)*
+.remail *(Daftar Menggunakan Email)*
+  
+◉ Daftar using name and age
+.daftar name.age
+*Contoh*
+.daftar FuadXy.20
+
+◉ Register using email
+.remail <your email>
+*Contoh*
+.remail fuadxy99@gmail.com
+`
 }[type]
-if (msgg) return conn.reply(m.chat, msgg, fliveLoc)
+if (msgg) return m.reply(`${msgg}`, false, {
+ contextInfo: {
+  forwardingScore: 1000,
+  isForwarded: true
+ }
+})
 }
 
 let jumlahRgb = 1500

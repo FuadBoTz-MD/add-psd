@@ -41,7 +41,7 @@
     },
   "license": "ISC",
   "dependencies": {
-       "@adiwajshing/baileys": "git+https://github.com/WhiskeySockets/Baileys",
+        "@adiwajshing/baileys": "npm:baileys-md@^5.0.5",
         "@bochilteam/scraper": "^3.0.0",
         "@shineiichijo/marika": "github:shineiichijo/marika",
         "@vitalets/google-translate-api": "^8.0.0",
@@ -110,6 +110,7 @@
         "terminal-image": "^2.0.0",
         "translate-google-api": "^1.0.4",
         "url-regex-safe": "^3.0.0",
+        "wibusoft": "*",
         "xfarr-api": "^1.0.3",
         "xmldom": "^0.6.0",
         "yargs": "^17.7.1",

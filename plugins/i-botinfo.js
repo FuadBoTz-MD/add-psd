@@ -51,14 +51,14 @@ let handler = async (m, { conn, usedPrefix, __dirname, text, command }) => {
   let neww = performance.now()
   let speed = neww - old
   let mentionedJid = [m.sender]
-    conn.sendButton(m.chat, 
-    '*––––––『 BOT INFO 』––––––*', 
-`👩‍💻 ᴅᴇᴠᴇʟᴏᴘᴇʀ: ${author}
+  let pp = 'https://telegra.ph/file/4ade2a019004dc58a3e32.png'
+let info = `
+👩‍💻 ᴅᴇᴠᴇʟᴏᴘᴇʀ: ${author}
 
 ⏳ ᴜᴩᴛɪᴍᴇ: ${uptime}
 📈 ᴅᴀᴛᴀʙᴀsᴇ: ${totalreg}
 
-${htki} Bot Info ${htka}
+◉ s ᴛ ᴀ ᴛ ᴜ s
 *Group Only:* ${global.opts['gconly'] ? '✅' : '❌'}
 *Restrict:* ${global.opts['restrict'] ? '✅' : '❌'}
 
@@ -72,10 +72,8 @@ ${htki} Bot Info ${htka}
 ⮕ ${groupsIn.length - groupsIn.length} - Groups Left
 ⮕ ${chats.length - groupsIn.length} - Personal Chats
 ⮕ ${chats.length} - Total Chats
-`.trim(), './media/botinfo.jpg', [
-[`👑ᴏᴡɴᴇʀ`, `${usedPrefix}owner`],
-[`💱ᴅᴏɴᴀᴛᴇ`, `${usedPrefix}donate`]
-], m, {asLocation: true})
+`.trim() 
+await conn.reply(m.chat, info, m, { contextInfo: { mentionedJid: [m.sender], forwardingScore: 9999, isForwarded: true, externalAdReply: { mediaType: 1, mediaUrl: pp, title: ']========❏ BOT INFO ❏========[', thumbnail: { url: pp }, thumbnailUrl: pp, sourceUrl: false, renderLargerThumbnail: true }}})
 }
 handler.help = ['botinfo']
 handler.tags = ['info']

@@ -1,54 +1,106 @@
-import { format } from 'util';
-import nodemailer from 'nodemailer';
-import axios from 'axios';
+import fetch from "node-fetch"
+let timeout = 120000
+let poin = 4999
+let handler = async (m, {
+    conn,
+    command,
+    text,
+    usedPrefix
+}) => {
+    conn.emailotp = conn.emailotp ? conn.emailotp : {}
+    let id = m.chat
+    if (!text) return m.reply(
+        `Example: ${usedPrefix + command} email`
+    )
+    if (id in conn.emailotp) return conn.reply(m.chat,
+        "Your OTP!",
+        conn.emailotp[id][0])
+    let generateOTP = (Math.floor(Math.random() * 9000) + 1000).toString()
+    let avatar = await conn.profilePictureUrl(m.sender, 'image').catch(_ => 'https://telegra.ph/file/a2ae6cbfa40f6eeea0cf1.jpg')
+    let res = await sendEmail(author, generateOTP, conn.user.jid.split("@")[0], avatar, text)
 
-let handler = async (m, { conn, args, usedPrefix, command }) => {
-  let users = db.data.users[m.sender];
-  try {
-    if (users.registered) return conn.reply(m.chat, `✅ Kamu sudah terdaftar.`, m);
-    if (!args || !args[0]) return conn.reply(m.chat, `${usedPrefix + command} 'email@gmail.com'`, m);
-    if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/ig.test(args[0])) return conn.reply(m.chat, 'Email tidak valid.', m);
-    let emails = Object.values(db.data.users).filter(v => v.email).map(v => v.email);
-    if (emails.includes(args[0])) return conn.reply(m.chat, 'Email sudah terdaftar!', m);
-    let code = `${getRandom(100, 900)}-${getRandom(100, 900)}`;
+    let json = {
+        code: generateOTP,
+        soal: "Reply pesan ini dan masukkan kode OTP"
+    }
+    if (res.success == true) {
+        let caption = `*Request kode OTP*
 
-    users.email = args[0];
-    users.code = code;
-    users.codeExpire = new Date() * 1;
+Untuk: ${text}
+${json.soal}
 
-    const transport = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'fuadbotzmd@gmail.com',
-        pass: 'sdvxsjehbouxitoc' // disini mungkin pass akun emailmu udh gw coba tapi ga work
-      }
-    });
+Code Expired *${(timeout / 1000).toFixed(2)} detik*
+Bonus: ${poin} XP
+`.trim()
+        conn.emailotp[id] = [
+            await conn.reply(m.chat,
+                caption,
+                m),
+            json, poin,
+            setTimeout(() => {
+                if (conn.emailotp[id]) conn.reply(m.chat,
+                    `Waktu habis!\nOTP: *${json.code}*`,
+                    conn.emailotp[id][0])
+                delete conn.emailotp[id]
+            }, timeout)
+        ]
+    } else {
+        conn.reply(m.chat, `*Gagal mengirim kode OTP*\nUntuk: ${text}`, m)
+    }
+}
+handler.help = ["remail"]
+handler.tags = ["xp"]
+handler.command = /^(remail)$/i
 
-    const mailOptions = {
-      from: {
-        name: 'FuadBoTz-MD',
-        address: 'fuadbotzmd@gmail.com'
-      },
-      to: args[0],
-      subject: 'Email Verification',
-      html: `<div style="padding:20px;border:1px dashed #222;font-size:15px"><tt>Hi <b>${m.pushName} 😘</b><br><br>Confirm your email to be able to use FuadBoTz-MD. Send this code to the bot and it will expire in 3 minutes.<br><center><h1>${code}</h1></center>Or copy and paste the URL below into your browser : <a href="https://wa.me/${conn.decodeJid(conn.user.id).split('@')[0]}?text=${code}">https://wa.me/${conn.decodeJid(conn.user.jid).split('@')[0]}?text=${code}</a><br><br><hr style="border:0px; border-top:1px dashed #222"><br>Regards, <b>FuadXy</b></tt></div>`
-    };
+export default handler
 
-    transport.sendMail(mailOptions, function(err, data) {
-      if (err) return conn.reply(m.chat, `❌ SMTP Error !!\n\n${err}`, m);
-      return conn.reply(m.chat, `✅ Check your mailbox to get a verification code.`, m);
-    });
-  } catch (e) {
-    conn.reply(m.chat, format(e), m);
-  }
-};
-
-handler.tags = ['xp']
-handler.command = ['remail'];
-export default handler;
-
-function getRandom(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+async function sendEmail(Name, OTP, Number, PP, Mail) {
+let html = `<!DOCTYPE html>
+<html>
+<head>
+  <title>Pengirim Kode OTP</title>
+</head>
+<body style="background-color: #f2f2f2; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif;">
+  <div class='container' style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); padding: 20px; width: 300px; text-align: center;">
+    <div class='profile-pic' style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 10px; background-color: #e5e5e5; background-image: url('${PP}'); background-size: cover; background-position: center;"></div>
+    <div class='name' style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">${Name}</div>
+    <div class='description' style="font-size: 14px; color: #888888; margin-bottom: 10px;">KODE OTP ANDA</div>
+    <div class='otp-code' style="font-size: 24px; font-weight: bold; margin-bottom: 20px;"><strong>${OTP}</strong></div>
+    <a href='https://wa.me/${Number}?text=${OTP}' style="text-decoration: none;">
+      <button class='send-button' style="background-color: #4caf50; color: #ffffff; border: none; border-radius: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer;">Kirim Kode</button>
+    </a>
+  </div>
+</body>
+</html>
+`
+    try {
+        return await fetch("https://send.api.mailtrap.io/api/send/", {
+                method: "POST",
+                headers: {
+                    "Authorization": "Bearer 46fae2154055e6df3901c95919531b2a",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "from": {
+                        "email": "notifier@boyne.dev",
+                        "name": Name
+                    },
+                    "to": [{
+                        "email": Mail,
+                        "name": Name
+                    }],
+                    "subject": "KODE OTP MU ( " + OTP + " )",
+                    "html": html,
+                    "category": "Notification"
+                })
+            })
+            .then(response => response.json())
+    } catch (error) {
+        console.error("Request failed:", error)
+        throw error
+    }
+}
+async function shortUrl(url) {
+    let res = await fetch(`https://tinyurl.com/api-create.php?url=${url}`)
+    return await res.text()
 }

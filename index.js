@@ -27,8 +27,6 @@ align: 'center',
 gradient: ['red', 'magenta']})
 
 
-setTimeout(() => {
-  chalkAnimation.rainbow('® By FuadXy彡\nHanya bot biasa... kadang suka error🗿')})
   
 var isRunning = false
 /**
@@ -91,3 +89,4 @@ function start(file) {
 }
 
 start('main.js')
+require("http").createServer((_, res) => res.end("uptime!")).listen(8080) // Agar Supp Run Di Replit 24 Jam! Jika Error Kasih Tanda // Sebelum Require

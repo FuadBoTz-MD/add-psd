@@ -9,12 +9,12 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     	try {
     	let img = await webp2png(await q.download()),
 			url = API('lolhuman', '/api/removebg', { img }, 'apikey')
-			await conn.sendFile(m.chat, url, 'removebg.png', '*Made by:* lolhuman', m)
+			await conn.sendFile(m.chat, url, 'removebg.png', '*Made by:* FuadXy', m)
     	} catch (e) {
     		let img = await q.download?.()
 			let out = await uploadImage(img)
 			let url = "https://removebg.api.akuari.my.id/other/removebgg?gambar=" + out
-			await conn.sendFile(m.chat, url, 'removebg.png', '*Made by:* akuari', m)
+			await conn.sendFile(m.chat, url, 'removebg.png', '*Made by:* FuadXd³', m)
     	}
     } else {
     	m.reply(`Kirim gambar dengan caption *${usedPrefix + command}* atau tag gambar yang sudah dikirim`)
