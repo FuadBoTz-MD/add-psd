@@ -89,4 +89,3 @@ function start(file) {
 }
 
 start('main.js')
-require("http").createServer((_, res) => res.end("uptime!")).listen(8080) // Agar Supp Run Di Replit 24 Jam! Jika Error Kasih Tanda // Sebelum Require
