@@ -10,10 +10,6 @@ import chalkAnimation from 'chalk-animation'
 import { createInterface } from 'readline'
 import yargs from 'yargs'
 
-
-import express from "express"
-import monitor from "express-status-monitor"
-const app = new express()
 // https://stackoverflow.com/a/50052194
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const require = createRequire(__dirname) // Bring in the ability to create the 'require' method
